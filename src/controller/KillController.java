@@ -38,7 +38,6 @@ public class KillController {
 		}else{
 			resposta.append(readProcess("ps -ef"));
 		}
-		System.out.println(resposta.toString());
 		return resposta.toString();
 	}
 	

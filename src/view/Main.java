@@ -12,6 +12,7 @@ public class Main {
 	public static void main(String[] args) {
 		KillController killControler = new KillController();
 		String mensagemDeErro = "Algo deu errado";
+		String valorInvalido = "Opção inválida !";
 		int escolha = 0;
 		while (escolha!=9) {
 			try {
@@ -21,7 +22,7 @@ public class Main {
 														"Digite 3 para listar matar um processo com o Nome \n"+
 														"Digite 9 para encerrar"));	
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Valor invï¿½lido !");
+				JOptionPane.showMessageDialog(null, valorInvalido);
 				escolha = 0;
 			}
 			
@@ -36,19 +37,19 @@ public class Main {
 				break;
 			case 2:
 				try {
-					int n = Integer.parseInt(JOptionPane.showInputDialog("digite o PID do processo"));	
+					int n = Integer.parseInt(JOptionPane.showInputDialog("Digite o PID do processo"));	
 					if(killControler.mataPid(n)) {
 						JOptionPane.showMessageDialog(null, "Processo encerrado !");
 					}else {
 						System.out.println(mensagemDeErro);
 					}
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Valor invï¿½lido !");
+					JOptionPane.showMessageDialog(null, "Valor inválido !");
 				}
 						
 				break;
 			case 3:
-				String processo = JOptionPane.showInputDialog("digite o nome do processo");	
+				String processo = JOptionPane.showInputDialog("Digite o nome do processo");	
 				if(killControler.mataNome(processo)) {
 					JOptionPane.showMessageDialog(null, "Processo encerrado !");
 				}else {
@@ -60,7 +61,7 @@ public class Main {
 				break;
 
 			default:
-				JOptionPane.showMessageDialog(null, "Valor invï¿½lido !");
+				JOptionPane.showMessageDialog(null, valorInvalido);
 				break;
 			}
 			
