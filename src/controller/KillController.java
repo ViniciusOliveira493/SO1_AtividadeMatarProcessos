@@ -36,35 +36,51 @@ public class KillController {
 		if(getOs().contains("Windows")) {
 			resposta.append(readProcess("tasklist /fo table"));
 		}else{
-			System.out.println("tux");
+			resposta.append(readProcess("ps -ef"));
 		}
 		System.out.println(resposta.toString());
 		return resposta.toString();
 	}
 	
-	public void mataPid(int pid) {
+	public boolean mataPid(int pid) {
+		boolean resultado = false;
 		if(getOs().contains("Windows")) {
 			try {
 				Runtime.getRuntime().exec("taskkill /PID " + pid);
+				resultado = true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}else {
-			System.out.println("tux");
+			try {
+				Runtime.getRuntime().exec("kill -9 " + pid);
+				resultado = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		return resultado;
 		
 	}
 	
-	public void mataNome(String nomeProcesso) {
+	public boolean mataNome(String nomeProcesso) {
+		boolean resultado = false;
 		if(getOs().contains("Windows")) {
 			try {
 				Runtime.getRuntime().exec("taskkill /IM " + nomeProcesso);
+				resultado = true;
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}else {
-			System.out.println("tux");
+			try {
+				Runtime.getRuntime().exec("killall " + nomeProcesso);
+				resultado = true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		return resultado;
 		
 	}
 }

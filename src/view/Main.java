@@ -11,7 +11,7 @@ import controller.KillController;
 public class Main {
 	public static void main(String[] args) {
 		KillController killControler = new KillController();
-		
+		String mensagemDeErro = "Algo deu errado";
 		int escolha = 0;
 		while (escolha!=9) {
 			try {
@@ -21,7 +21,7 @@ public class Main {
 														"Digite 3 para listar matar um processo com o Nome \n"+
 														"Digite 9 para encerrar"));	
 			} catch (Exception e) {
-				JOptionPane.showMessageDialog(null, "Valor inválido !");
+				JOptionPane.showMessageDialog(null, "Valor invï¿½lido !");
 				escolha = 0;
 			}
 			
@@ -29,31 +29,38 @@ public class Main {
 			case 1:
 				JTextArea text = new JTextArea(killControler.listarProcessos());
 				JScrollPane pane = new JScrollPane(text);
-				text.setLineWrap(true);
-				text.setWrapStyleWord(true);
-				pane.setPreferredSize(new Dimension(700,500));
-				JOptionPane.showMessageDialog(null, pane);
+				text.setLineWrap(false);
+				text.setWrapStyleWord(false);
+				pane.setPreferredSize(new Dimension(800,500));
+				JOptionPane.showMessageDialog(null, pane,"Processos",JOptionPane.OK_OPTION);
 				break;
 			case 2:
 				try {
 					int n = Integer.parseInt(JOptionPane.showInputDialog("digite o PID do processo"));	
-					killControler.mataPid(n);
-					JOptionPane.showMessageDialog(null, "Processo encerrado !");
+					if(killControler.mataPid(n)) {
+						JOptionPane.showMessageDialog(null, "Processo encerrado !");
+					}else {
+						System.out.println(mensagemDeErro);
+					}
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, "Valor inválido !");
+					JOptionPane.showMessageDialog(null, "Valor invï¿½lido !");
 				}
 						
 				break;
 			case 3:
 				String processo = JOptionPane.showInputDialog("digite o nome do processo");	
-				killControler.mataNome(processo);
-				JOptionPane.showMessageDialog(null, "Processo encerrado !");
+				if(killControler.mataNome(processo)) {
+					JOptionPane.showMessageDialog(null, "Processo encerrado !");
+				}else {
+					System.out.println(mensagemDeErro);
+				}
 				break;
 			case 9:
 				
 				break;
 
 			default:
+				JOptionPane.showMessageDialog(null, "Valor invï¿½lido !");
 				break;
 			}
 			
